@@ -27,6 +27,11 @@ type BookCatalogClient interface {
 	GetAuthor(ctx context.Context, in *GetAuthorRequest, opts ...grpc.CallOption) (*GetAuthorResponse, error)
 	UpdateAuthor(ctx context.Context, in *UpdateAuthorRequest, opts ...grpc.CallOption) (*UpdateAuthorResponse, error)
 	DeleteAuthor(ctx context.Context, in *DeleteAuthorRequest, opts ...grpc.CallOption) (*DeleteAuthorResponse, error)
+	CreatePublisher(ctx context.Context, in *CreatePublisherRequest, opts ...grpc.CallOption) (*CreatePublisherResponse, error)
+	GetAllPublisher(ctx context.Context, in *GetAllPublisherRequest, opts ...grpc.CallOption) (*GetAllPublisherResponse, error)
+	GetPublisher(ctx context.Context, in *GetPublisherRequest, opts ...grpc.CallOption) (*GetPublisherResponse, error)
+	UpdatePublisher(ctx context.Context, in *UpdatePublisherRequest, opts ...grpc.CallOption) (*UpdatePublisherResponse, error)
+	DeletePublisher(ctx context.Context, in *DeletePublisherRequest, opts ...grpc.CallOption) (*DeletePublisherResponse, error)
 }
 
 type bookCatalogClient struct {
@@ -82,6 +87,51 @@ func (c *bookCatalogClient) DeleteAuthor(ctx context.Context, in *DeleteAuthorRe
 	return out, nil
 }
 
+func (c *bookCatalogClient) CreatePublisher(ctx context.Context, in *CreatePublisherRequest, opts ...grpc.CallOption) (*CreatePublisherResponse, error) {
+	out := new(CreatePublisherResponse)
+	err := c.cc.Invoke(ctx, "/pb.BookCatalog/CreatePublisher", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookCatalogClient) GetAllPublisher(ctx context.Context, in *GetAllPublisherRequest, opts ...grpc.CallOption) (*GetAllPublisherResponse, error) {
+	out := new(GetAllPublisherResponse)
+	err := c.cc.Invoke(ctx, "/pb.BookCatalog/GetAllPublisher", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookCatalogClient) GetPublisher(ctx context.Context, in *GetPublisherRequest, opts ...grpc.CallOption) (*GetPublisherResponse, error) {
+	out := new(GetPublisherResponse)
+	err := c.cc.Invoke(ctx, "/pb.BookCatalog/GetPublisher", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookCatalogClient) UpdatePublisher(ctx context.Context, in *UpdatePublisherRequest, opts ...grpc.CallOption) (*UpdatePublisherResponse, error) {
+	out := new(UpdatePublisherResponse)
+	err := c.cc.Invoke(ctx, "/pb.BookCatalog/UpdatePublisher", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bookCatalogClient) DeletePublisher(ctx context.Context, in *DeletePublisherRequest, opts ...grpc.CallOption) (*DeletePublisherResponse, error) {
+	out := new(DeletePublisherResponse)
+	err := c.cc.Invoke(ctx, "/pb.BookCatalog/DeletePublisher", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BookCatalogServer is the server API for BookCatalog service.
 // All implementations must embed UnimplementedBookCatalogServer
 // for forward compatibility
@@ -91,6 +141,11 @@ type BookCatalogServer interface {
 	GetAuthor(context.Context, *GetAuthorRequest) (*GetAuthorResponse, error)
 	UpdateAuthor(context.Context, *UpdateAuthorRequest) (*UpdateAuthorResponse, error)
 	DeleteAuthor(context.Context, *DeleteAuthorRequest) (*DeleteAuthorResponse, error)
+	CreatePublisher(context.Context, *CreatePublisherRequest) (*CreatePublisherResponse, error)
+	GetAllPublisher(context.Context, *GetAllPublisherRequest) (*GetAllPublisherResponse, error)
+	GetPublisher(context.Context, *GetPublisherRequest) (*GetPublisherResponse, error)
+	UpdatePublisher(context.Context, *UpdatePublisherRequest) (*UpdatePublisherResponse, error)
+	DeletePublisher(context.Context, *DeletePublisherRequest) (*DeletePublisherResponse, error)
 	mustEmbedUnimplementedBookCatalogServer()
 }
 
@@ -112,6 +167,21 @@ func (UnimplementedBookCatalogServer) UpdateAuthor(context.Context, *UpdateAutho
 }
 func (UnimplementedBookCatalogServer) DeleteAuthor(context.Context, *DeleteAuthorRequest) (*DeleteAuthorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAuthor not implemented")
+}
+func (UnimplementedBookCatalogServer) CreatePublisher(context.Context, *CreatePublisherRequest) (*CreatePublisherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePublisher not implemented")
+}
+func (UnimplementedBookCatalogServer) GetAllPublisher(context.Context, *GetAllPublisherRequest) (*GetAllPublisherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllPublisher not implemented")
+}
+func (UnimplementedBookCatalogServer) GetPublisher(context.Context, *GetPublisherRequest) (*GetPublisherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPublisher not implemented")
+}
+func (UnimplementedBookCatalogServer) UpdatePublisher(context.Context, *UpdatePublisherRequest) (*UpdatePublisherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePublisher not implemented")
+}
+func (UnimplementedBookCatalogServer) DeletePublisher(context.Context, *DeletePublisherRequest) (*DeletePublisherResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePublisher not implemented")
 }
 func (UnimplementedBookCatalogServer) mustEmbedUnimplementedBookCatalogServer() {}
 
@@ -216,6 +286,96 @@ func _BookCatalog_DeleteAuthor_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookCatalog_CreatePublisher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePublisherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookCatalogServer).CreatePublisher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BookCatalog/CreatePublisher",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookCatalogServer).CreatePublisher(ctx, req.(*CreatePublisherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookCatalog_GetAllPublisher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllPublisherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookCatalogServer).GetAllPublisher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BookCatalog/GetAllPublisher",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookCatalogServer).GetAllPublisher(ctx, req.(*GetAllPublisherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookCatalog_GetPublisher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPublisherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookCatalogServer).GetPublisher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BookCatalog/GetPublisher",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookCatalogServer).GetPublisher(ctx, req.(*GetPublisherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookCatalog_UpdatePublisher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePublisherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookCatalogServer).UpdatePublisher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BookCatalog/UpdatePublisher",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookCatalogServer).UpdatePublisher(ctx, req.(*UpdatePublisherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BookCatalog_DeletePublisher_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePublisherRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookCatalogServer).DeletePublisher(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.BookCatalog/DeletePublisher",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookCatalogServer).DeletePublisher(ctx, req.(*DeletePublisherRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookCatalog_ServiceDesc is the grpc.ServiceDesc for BookCatalog service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +402,26 @@ var BookCatalog_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAuthor",
 			Handler:    _BookCatalog_DeleteAuthor_Handler,
+		},
+		{
+			MethodName: "CreatePublisher",
+			Handler:    _BookCatalog_CreatePublisher_Handler,
+		},
+		{
+			MethodName: "GetAllPublisher",
+			Handler:    _BookCatalog_GetAllPublisher_Handler,
+		},
+		{
+			MethodName: "GetPublisher",
+			Handler:    _BookCatalog_GetPublisher_Handler,
+		},
+		{
+			MethodName: "UpdatePublisher",
+			Handler:    _BookCatalog_UpdatePublisher_Handler,
+		},
+		{
+			MethodName: "DeletePublisher",
+			Handler:    _BookCatalog_DeletePublisher_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

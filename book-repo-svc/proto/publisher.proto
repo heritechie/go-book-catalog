@@ -7,7 +7,8 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
 
 message Publisher {
-    string name = 1;
-    google.protobuf.Timestamp created_at = 2;
-    google.protobuf.Timestamp updated_at = 3;
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp updated_at = 4;
 }

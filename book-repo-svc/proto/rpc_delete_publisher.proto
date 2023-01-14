@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
+
+message DeletePublisherRequest {
+    string publisher_id = 1;
+}
+
+message DeletePublisherResponse {
+    string message = 1;
+}

@@ -18,7 +18,7 @@ func (server *Server) CreateAuthor(ctx context.Context, req *pb.CreateAuthorRequ
 		UpdatedAt: now,
 	}
 
-	result := server.gorm.Create(newAuthor)
+	result := server.gorm.Create(&newAuthor)
 
 	if result.Error != nil {
 		return nil, result.Error
@@ -26,6 +26,7 @@ func (server *Server) CreateAuthor(ctx context.Context, req *pb.CreateAuthorRequ
 
 	return &pb.CreateAuthorResponse{
 		Author: &pb.Author{
+			Id:        newAuthor.ID.String(),
 			Name:      newAuthor.Name,
 			CreatedAt: timestamppb.New(newAuthor.CreatedAt),
 			UpdatedAt: timestamppb.New(newAuthor.UpdatedAt),
