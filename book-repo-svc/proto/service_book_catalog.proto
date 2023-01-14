@@ -3,16 +3,22 @@ syntax = "proto3";
 package pb;
 
 import "rpc_create_author.proto";
+import "rpc_get_all_author.proto";
 import "rpc_get_author.proto";
 import "rpc_update_author.proto";
-import "rpc_get_all_author.proto";
 import "rpc_delete_author.proto";
 
 import "rpc_create_publisher.proto";
+import "rpc_get_all_publisher.proto";
 import "rpc_get_publisher.proto";
 import "rpc_update_publisher.proto";
-import "rpc_get_all_publisher.proto";
 import "rpc_delete_publisher.proto";
+
+import "rpc_create_book.proto";
+import "rpc_get_all_book.proto";
+import "rpc_get_book.proto";
+import "rpc_update_book.proto";
+import "rpc_delete_book.proto";
 
 option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
 
@@ -28,4 +34,11 @@ service BookCatalog {
     rpc GetPublisher (GetPublisherRequest) returns (GetPublisherResponse) {}
     rpc UpdatePublisher (UpdatePublisherRequest) returns (UpdatePublisherResponse) {}
     rpc DeletePublisher (DeletePublisherRequest) returns (DeletePublisherResponse) {}
+
+    rpc CreateBook (CreateBookRequest) returns (CreateBookResponse) {}
+    rpc GetAllBook (GetAllBookRequest) returns (GetAllBookResponse) {}
+    rpc GetBook (GetBookRequest) returns (GetBookResponse) {}
+    rpc UpdateBook (UpdateBookRequest) returns (UpdateBookResponse) {}
+    rpc DeleteBook (DeleteBookRequest) returns (DeleteBookResponse) {}
+    
 }

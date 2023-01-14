@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+import "book.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
+
+message GetAllBookRequest {}
+
+message GetAllBookResponse {
+    repeated Book books = 1;
+}

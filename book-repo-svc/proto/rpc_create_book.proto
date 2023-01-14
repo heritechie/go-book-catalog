@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "book.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
+
+message CreateBookRequest {
+    string title = 1;
+    string description = 2;
+    string year  = 3;
+    string author_id = 4;
+    string publisher_id = 5;
+}
+
+message CreateBookResponse {
+    Book book = 1;
+}

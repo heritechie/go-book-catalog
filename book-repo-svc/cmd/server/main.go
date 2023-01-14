@@ -25,33 +25,16 @@ func main() {
 		log.Fatal().Err(err).Msg("cannot load shared config")
 	}
 
-	// config, err := util.LoadConfig(".")
-
-	// if err != nil {
-	// 	log.Fatal().Err(err).Msg("cannot load service config")
-	// }
-
 	if sharedConfig.Environment == "development" {
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 
-	// runDBMigration(config.MigrationURL, sharedConfig.DBSource)
+	if err != nil {
+		log.Fatal().Err(err).Msg("cannot load service config")
+	}
 	runGrpcServer(sharedConfig)
 
 }
-
-// func runDBMigration(migrationURL string, dbSource string) {
-// 	migration, err := migrate.New(migrationURL, dbSource)
-// 	if err != nil {
-// 		log.Fatal().Err(err).Msg("cannot create new migrate instance")
-// 	}
-
-// 	if err = migration.Up(); err != nil && err != migrate.ErrNoChange {
-// 		log.Fatal().Err(err).Msg("failed to run migrate up")
-// 	}
-
-// 	log.Info().Msg("db migrated successfully")
-// }
 
 func runGrpcServer(config sharedUtil.SharedConfig) {
 	server, err := api.NewServer(config)
