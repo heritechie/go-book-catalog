@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "author.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
+
+message UpdateAuthorRequest {
+    string author_id = 1;
+    string name = 2;
+}
+
+message UpdateAuthorResponse {
+    Author author = 1;
+}

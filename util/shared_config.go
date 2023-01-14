@@ -7,7 +7,12 @@ import (
 type SharedConfig struct {
 	Environment     string `mapstructure:"ENVIRONMENT"`
 	DBDriver        string `mapstructure:"DB_DRIVER"`
-	DBSource        string `mapstructure:"DB_SOURCE"`
+	DBHost          string `mapstructure:"DB_HOST"`
+	DBPort          string `mapstructure:"DB_PORT"`
+	DBUsername      string `mapstructure:"DB_USERNAME"`
+	DBPassword      string `mapstructure:"DB_PASSWORD"`
+	DBName          string `mapstructure:"DB_NAME"`
+	PGSSLMode       string `mapstructure:"PG_SSL_MODE"`
 	RedisAddress    string `mapstructure:"REDIS_ADDRESS"`
 	BookRepoAddress string `mapstructure:"BOOK_REPO_SVC_ADDRESS"`
 }

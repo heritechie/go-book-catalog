@@ -3,9 +3,17 @@ syntax = "proto3";
 package pb;
 
 import "rpc_create_author.proto";
+import "rpc_get_author.proto";
+import "rpc_update_author.proto";
+import "rpc_get_all_author.proto";
+import "rpc_delete_author.proto";
 
 option go_package = "github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb";
 
 service BookCatalog {
     rpc CreateAuthor (CreateAuthorRequest) returns (CreateAuthorResponse) {}
+    rpc GetAllAuthor (GetAllAuthorRequest) returns (GetAllAuthorResponse) {}
+    rpc GetAuthor (GetAuthorRequest) returns (GetAuthorResponse) {}
+    rpc UpdateAuthor (UpdateAuthorRequest) returns (UpdateAuthorResponse) {}
+    rpc DeleteAuthor (DeleteAuthorRequest) returns (DeleteAuthorResponse) {}
 }
