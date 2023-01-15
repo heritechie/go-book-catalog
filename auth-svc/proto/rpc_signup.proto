@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/heritechie/go-book-catalog/auth-svc/pkg/pb";
+
+message SignUpRequest {
+    string username = 1;
+    string password = 2;
+    string password_confirmation = 3;
+}
+
+message SignUpResponse {
+    string username = 1;
+    string user_id = 2;
+}

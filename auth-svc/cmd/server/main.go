@@ -4,8 +4,8 @@ import (
 	"net"
 	"os"
 
-	"github.com/heritechie/go-book-catalog/book-repo-svc/api"
-	"github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb"
+	"github.com/heritechie/go-book-catalog/auth-svc/api"
+	"github.com/heritechie/go-book-catalog/auth-svc/pkg/pb"
 	genServer "github.com/heritechie/go-book-catalog/internal/server"
 
 	sharedUtil "github.com/heritechie/go-book-catalog/internal/util"
@@ -27,25 +27,21 @@ func main() {
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot load service config")
-	}
 	runGrpcServer(sharedConfig)
-
 }
 
-func runGrpcServer(config sharedUtil.SharedConfig) {
-	server, err := api.NewServer(config)
+func runGrpcServer(sharedConfig sharedUtil.SharedConfig) {
+	server, err := api.NewServer(sharedConfig)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")
 	}
 
 	gprcLogger := grpc.UnaryInterceptor(genServer.GrpcLogger)
 	grpcServer := grpc.NewServer(gprcLogger)
-	pb.RegisterBookCatalogServer(grpcServer, server)
+	pb.RegisterAuthServer(grpcServer, server)
 	reflection.Register(grpcServer)
 
-	listener, err := net.Listen("tcp", config.BookRepoSvcAddress)
+	listener, err := net.Listen("tcp", sharedConfig.AuthSvcAddress)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create listener")
 	}

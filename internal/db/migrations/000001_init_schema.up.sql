@@ -1,7 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE "author" (
-  "id" uuid DEFAULT uuid_generate_v4 (),
+  "id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   "name" varchar NOT NULL,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now()),
@@ -9,7 +9,7 @@ CREATE TABLE "author" (
 );
 
 CREATE TABLE "publisher" (
-  "id" uuid DEFAULT uuid_generate_v4 (),
+  "id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   "name" varchar NOT NULL,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now()),
@@ -17,7 +17,7 @@ CREATE TABLE "publisher" (
 );
 
 CREATE TABLE "book" (
-  "id" uuid DEFAULT uuid_generate_v4 (),
+  "id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   "title" varchar NOT NULL,
   "description" varchar,
   "year" varchar,

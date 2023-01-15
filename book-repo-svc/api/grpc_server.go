@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/heritechie/go-book-catalog/book-repo-svc/internal/db"
 	"github.com/heritechie/go-book-catalog/book-repo-svc/pkg/pb"
-	"github.com/heritechie/go-book-catalog/util"
+	"github.com/heritechie/go-book-catalog/internal/db"
+	"github.com/heritechie/go-book-catalog/internal/util"
 	"gorm.io/gorm"
 )
 
@@ -14,11 +14,18 @@ type Server struct {
 	gorm   *gorm.DB
 }
 
-// Init creates a new gRPC server.
+// Init creates a new gRPC server for book catalog repo service.
 func NewServer(config util.SharedConfig) (*Server, error) {
+
+	conn, err := db.ConnectDB(config)
+
+	if err != nil {
+		return nil, err
+	}
+
 	server := &Server{
 		config: config,
-		gorm:   db.ConnectDB(config),
+		gorm:   conn,
 	}
 
 	return server, nil

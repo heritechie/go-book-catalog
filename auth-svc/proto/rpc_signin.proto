@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+import "user.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/auth-svc/pkg/pb";
+
+message SignInRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message SignInResponse {
+    string username = 1;
+    string access_token = 2;
+    User user = 3;
+}

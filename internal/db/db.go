@@ -8,10 +8,10 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
 
-	"github.com/heritechie/go-book-catalog/util"
+	"github.com/heritechie/go-book-catalog/internal/util"
 )
 
-func ConnectDB(config util.SharedConfig) *gorm.DB {
+func ConnectDB(config util.SharedConfig) (*gorm.DB, error) {
 	var err error
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Jakarta", config.DBHost, config.DBUsername, config.DBPassword, config.DBName, config.DBPort, config.PGSSLMode)
@@ -23,7 +23,8 @@ func ConnectDB(config util.SharedConfig) *gorm.DB {
 	})
 	if err != nil {
 		log.Fatal("Failed to connect to the Database")
+		return nil, err
 	}
 
-	return conn
+	return conn, nil
 }

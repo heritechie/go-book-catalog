@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/auth-svc/pkg/pb";
+
+message UserAuth {
+    string id = 1;
+    string username = 2;
+    string password = 3;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}

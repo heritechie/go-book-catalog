@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+import "rpc_signup.proto";
+import "rpc_signin.proto";
+
+option go_package = "github.com/heritechie/go-book-catalog/auth-svc/pkg/pb";
+
+service Auth {
+    rpc SignUp (SignUpRequest) returns (SignUpResponse) {}
+    rpc SignIn (SignInRequest) returns (SignInResponse) {}
+}
